@@ -78,16 +78,4 @@ public class ArcticTrack extends Track
 			location = Track.SIZE -1 ;	    
 		}
     }
-	
-	//Accessor method for SUV fuel
-	public int getSUVFuel()
-	{
-		return(anSUV.getFuel());
-	}
-	
-	//Mutator method for SUV fuel
-	public void setSUVFuel(int fuel)
-	{
-		anSUV.setFuel(fuel);
-	}
 }

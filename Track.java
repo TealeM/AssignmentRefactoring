@@ -1,14 +1,3 @@
-/*
-  Author:  James Tam
-  Version: April 1, 2013
-  
-  Features:
-  * Stores and tracks all information associated with a racetrack.
-
-
-*/
-
-
 public class Track
 {
     public static final int SIZE = 25;
@@ -94,13 +83,13 @@ public class Track
     // child classes that needs to place the two cars at the starting location.
     protected void setLocation(Car aCar, int index)
     {
-	if ((index >= 0) && (index < Track.SIZE))
-	    aTrack[index] = aCar;
-	else
-	{
-	    if ((index < 0) || (index >= Track.SIZE))
-		aTrack[Track.SIZE - 1] = aCar;	    
-	}
+		if ((index >= 0) && (index < Track.SIZE))
+		    aTrack[index] = aCar;
+		else
+		{
+		    if ((index < 0) || (index >= Track.SIZE))
+			aTrack[Track.SIZE - 1] = aCar;	    
+		}
     }
 	
 	protected void setToNull(int index)

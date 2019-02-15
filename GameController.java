@@ -43,9 +43,7 @@ public class GameController
 	private int selectionCheatforSUV;
 	private int newFuelSports;
 	private int newFuelSUV;
-	
-	private boolean endSUV = false;
-	private boolean endSports = false;
+
 	private boolean end = false;
 		
 	
@@ -75,23 +73,23 @@ public class GameController
 		
 		while (end == false)
 		{		
-			if (endSUV == false)
+			if (anSUV.isDead == false)
 			{	
-				if (arcTrack.getSUVFuel() <=0){
+				if (anSUV.getFuel() <=0){
 					System.out.println("\nSUV is out of fuel and cannot move.\n");
-					endSUV = true;}
+					anSUV.isDead = true;}
 				else
 					runTurnSUV();
 			}
-			if (endSports == false)
+			if (aSports.isDead == false)
 			{	
-				if (desTrack.getSportsFuel() <=0){
+				if (aSports.getFuel() <=0){
 					System.out.println("\nSports car is out of fuel and cannot move.\n");
-					endSports = true;}
+					aSports.isDead = true;}
 				else
 					runTurnSports();
 			}
-			if (endSUV == true && endSports == true)	
+			if (anSUV.isDead == true && aSports.isDead == true)	
 				bothOutofFuel();
 			if (arcTrack.getLocation() >= 24 && desTrack.getLocation() >= 24)
 				winBoth();
@@ -100,6 +98,7 @@ public class GameController
 			if (desTrack.getLocation() >= 24)
 				winSports();
 			
+			System.out.println("NEXT ROUND! \n");
 			arcTrack.display();
 			desTrack.display();
 		}
@@ -148,10 +147,6 @@ public class GameController
 	//Run the SUV turn: display and process menu, and loop until valid input is entered
 	private void runTurnSUV()
 	{
-		//DEBUG MESSAGE 
-		if (Debug.on == true)
-		System.out.println("[debug] Running SUV turn...\n");
-	
 		do
 		{
 			displayMenuSUV();
@@ -164,9 +159,6 @@ public class GameController
 	//Run the Sports car turn: display and process menu, and loop until valid input is entered
 	private void runTurnSports()
 	{
-		//DEBUG MESSAGE 
-		if (Debug.on == true)
-		System.out.println("[debug] Running Sports car turn...\n");
 		do
 		{
 			displayMenuSports();
@@ -220,14 +212,11 @@ public class GameController
 			selectionCheatforSUV = -1;}	
 		
 		else {
-			//DEBUG MESSAGE 
-			if (Debug.on == true)
-			System.out.println("[debug] Moving SUV...\n");
 			arcTrack.move(AWD);}
 			
-		if (arcTrack.getSUVFuel() <=0){
+		if (anSUV.getFuel() <=0){
 			System.out.println("\nSUV is out of fuel and cannot move.\n");
-			endSUV = true;}			
+			anSUV.isDead = true;}			
 	}
 	
 	//Sports car menu case 'd': move sports car according to if a cheat is being acted on it or not
@@ -247,25 +236,18 @@ public class GameController
 			selectionCheatforSports = -1;}
 		
 		else{
-			//DEBUG MESSAGE 
-			if (Debug.on == true)
-			System.out.println("[debug] Moving Sports car...\n");
 			desTrack.move();}
 			
-		if (desTrack.getSportsFuel() <=0){
+		if (aSports.getFuel() <=0){
 			System.out.println("\nSports car is out of fuel and cannot move.\n");
-			endSports = true;}
+			aSports.isDead = true;}
 			
 	}
 	
 	
 	//Process SUV menu: Carry out actions for whichever SUV option user selected
 	private void processMenuSUV(char selection)
-	{
-		//DEBUG MESSAGE 
-		if (Debug.on == true)
-		System.out.println("[debug] Processing SUV menu...\n");
-	
+	{	
 		switch(selection)
 		{
 			case 'A':
@@ -297,10 +279,6 @@ public class GameController
 	//Process Sports car menu: Carry out actions for whichever Sportcs car option user selected
 	private void processMenuSports(char selection)
 	{
-		//DEBUG MESSAGE 
-		if (Debug.on == true)
-		System.out.println("[debug] Processing Sports car menu...\n");
-	
 		switch(selection)
 		{
 			case 'D':
@@ -356,14 +334,14 @@ public class GameController
 	{
 		System.out.print("Set new fuel value (non-negative value only): ");
 		newFuelSports = in.nextInt();
-		desTrack.setSportsFuel(newFuelSports);
+		aSports.setFuel(newFuelSports);
 	}
 	//Cheat menu OPTION 2
 	private void cheatFuelSUV()
 	{
 		System.out.print("Set new fuel value (non-negative value only): ");
 		newFuelSUV = in.nextInt();
-		arcTrack.setSUVFuel(newFuelSUV);	
+		anSUV.setFuel(newFuelSUV);	
 	}
 	//Cheat menu OPTION 3
 	private void cheatDesertLocation()
@@ -397,10 +375,6 @@ public class GameController
 	//Process cheat menu: Carry out actions for whichever cheat option user selected
 	private void processMenuCheat(int selection)
 	{
-		//DEBUG MESSAGE 
-		if (Debug.on == true)
-		System.out.println("[debug] Processing Cheat menu...\n");
-	
 		switch(selection)
 		{
 			case 0:

@@ -73,21 +73,4 @@ public class DesertTrack extends Track
 			location = Track.SIZE -1 ;	    
 		}
     }
-	
-	//Accessor method for Sports car fuel
-	public int getSportsFuel()
-	{
-		return(aSports.getFuel());
-	}
-	
-	//Mutator method for Sports car fuel
-	public void setSportsFuel(int fuel)
-	{
-		aSports.setFuel(fuel);
-	}
-	
-	
-	
-	
-	
 }

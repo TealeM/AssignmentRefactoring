@@ -1,13 +1,3 @@
-/*
-  Author:  James Tam
-  Version: April 1, 2013
-
-  Features:
-  * Tracks and manages information for appearance and fuel capacity.
-
-
- */
-
 public class Car
 {
     public static final int STARTING_FUEL = 40;
@@ -17,6 +7,8 @@ public class Car
     private char appearance;
     private int fuel;
 
+    public boolean isDead;
+    
     public Car()
     {
 	    setAppearance('c');
@@ -52,8 +44,6 @@ public class Car
     // this method must communicate to the caller how far it moves.
 
 
-    // If this method is overriden then all child class methods must also display
-    // the same debugging messages shown below.
     public int move ()
     {
   	   consumeFuel(CONSUMPTION_RATE);
