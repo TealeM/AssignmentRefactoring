@@ -34,6 +34,7 @@ public class GameController
 	private SUV anSUV;
 	private Sports aSports;
 	private Displayer aDisplayer;
+	private GameEnder aGameEnder;
 	
 	
 	private int cheatAffectingSports;
@@ -52,6 +53,7 @@ public class GameController
 		anSUV = new SUV();
 		aSports = new Sports();
 		aDisplayer = new Displayer();
+		aGameEnder = new GameEnder(anSUV, aSports, arcTrack, desTrack);
 	}
 
 	// Start: Begins loop for turns, ends loop if one or both cars win, or they both run out of fuel
@@ -82,61 +84,12 @@ public class GameController
 			}
 			
 			//Check if the game is over
-			if (anSUV.isDead == true && aSports.isDead == true)	
-				bothOutofFuel();
-			if (arcTrack.getLocation() >= 24 && desTrack.getLocation() >= 24)
-				winBoth();
-			if (arcTrack.getLocation() >= 24)
-				winSUV();
-			if (desTrack.getLocation() >= 24)
-				winSports();
+			aGameEnder.checkIfOver();
 			
 			arcTrack.display();
 			desTrack.display();
 		}
 	}
-	
-	/**************************** BEHAVIOUR FOR WHEN THE GAME ENDS **************************************/
-	
-	//When both cars run out of fuel: print message, display tracks, end program
-	private void bothOutofFuel()
-	{
-		System.out.println("Both cars are out of fuel, simulation is a draw.");
-		arcTrack.display();
-		desTrack.display();
-		System.exit(0);
-	}
-	//When both cars reach the end together: print message, display tracks, end program
-	private void winBoth()
-	{
-		System.out.println("Both cars have reached the end in the same round, it's a tie!");
-		arcTrack.display();
-		desTrack.display();
-		System.exit(0);
-	}
-	//When SUV reaches the end: print message, display tracks, end program
-	private void winSUV()
-	{
-		System.out.println("SUV has reached the end first!");
-		arcTrack.display();
-		desTrack.display();
-		System.exit(0);
-	}
-	//When Sports car reaches the end: print message, display tracks, end program
-	private void winSports()
-	{
-		System.out.println("Sports car has reached the end first!");
-		arcTrack.display();
-		desTrack.display();
-		System.exit(0);
-	}
-	//When user quits early: print message, display tracks, end program
-	private void quitEarly()
-	{
-		System.out.println("Quitting game before end: simulation is a draw.");
-		System.exit(0);
-	}
-	/******************************************************************************************/
 
 	//Run the SUV turn: display and process menu
 	private void runTurnSUV()
@@ -203,8 +156,7 @@ public class GameController
 			
 		if (aSports.getFuel() <=0){
 			System.out.println("\nSports car is out of fuel and cannot move.\n");
-			aSports.isDead = true;}
-			
+			aSports.isDead = true;}		
 	}
 	
 	
@@ -222,7 +174,7 @@ public class GameController
 				break;
 	
 			case 'q':
-				quitEarly();
+				aGameEnder.quitEarly();
 				break;
 			
 			case 'c':
@@ -245,7 +197,7 @@ public class GameController
 				break;
 	
 			case 'q':
-				quitEarly();
+				aGameEnder.quitEarly();
 				break;
 			
 			case 'c':

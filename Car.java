@@ -39,19 +39,6 @@ public class Car
 	       return false;
     }
 
-    // Car internally knows how much fuel to use and how far to move. However the 
-    // actual movement in the virtual track must be done by another class hence
-    // this method must communicate to the caller how far it moves.
-
-
-    public int move ()
-    {
-  	   consumeFuel(CONSUMPTION_RATE);
-	   System.out.println("Current fuel: " + fuel);
-	   System.out.println("Fuel use: " + CONSUMPTION_RATE);
-  	   return STANDARD_DISTANCE;
-    }
-
     public void setAppearance (char anAppearance)
     {
  	   appearance = anAppearance;

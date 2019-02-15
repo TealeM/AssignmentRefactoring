@@ -25,9 +25,10 @@ public class ArcticTrack extends Track
 	//Move car with only AWD parameter 
 	public void move(boolean AWD)
 	{
+		int distanceMoved;
+		
 		if (location <=24)
 			setToNull(location);
-		int distanceMoved;
 		distanceMoved = anSUV.move(AWD, blizzard);
 		location = location + distanceMoved;
 		blizzard = false;
