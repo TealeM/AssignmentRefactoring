@@ -34,7 +34,7 @@ public class Displayer {
 		selection = line.charAt(0);
 		
 		//Error checking for bad input
-		while (selection != 'd' && selection!= 'D' && selection!= 'c' && selection!= 'C' && selection!= 'q'&& selection!= 'Q')
+		while (selection != 'a' && selection!= 'A' && selection != 'd' && selection!= 'D' && selection!= 'c' && selection!= 'C' && selection!= 'q'&& selection!= 'Q')
 		{
 			System.out.println("Please enter 'a', 'd' or 'q'");
 			line = in.nextLine();
